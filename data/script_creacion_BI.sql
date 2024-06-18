@@ -1,0 +1,753 @@
+﻿	USE GD1C2024
+
+--DROP PREVENTIVO DE FUNCIONES------------------------------------------------------------
+IF EXISTS(SELECT [name] FROM sys.objects WHERE [name] = 'getAgeRange')
+	DROP FUNCTION LAMBDA.getAgeRange
+
+IF EXISTS(SELECT [name] FROM sys.objects WHERE [name] = 'getAge')
+	DROP FUNCTION LAMBDA.getAge
+
+IF EXISTS(SELECT [name] FROM sys.objects WHERE [name] = 'getTurn')
+	DROP FUNCTION LAMBDA.getTurn
+
+IF EXISTS(SELECT [name] FROM sys.objects WHERE [name] = 'fn_Cuatrimestre')
+	DROP FUNCTION LAMBDA.fn_Cuatrimestre
+
+--DROP PREVENTIVO DE TABLAS------------------------------------------------------------
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_fact_envios')
+DROP TABLE  LAMBDA.BI_fact_envios
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_fact_pagos')
+DROP TABLE  LAMBDA.BI_fact_pagos
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_fact_ventas')
+DROP TABLE  LAMBDA.BI_fact_ventas
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_clientes')
+DROP TABLE  LAMBDA.BI_dim_clientes
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_estados')
+DROP TABLE  LAMBDA.BI_dim_estados
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_tiempos')
+DROP TABLE  LAMBDA.BI_dim_tiempos
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_sucursales')
+DROP TABLE  LAMBDA.BI_dim_sucursales
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_localidades')
+DROP TABLE  LAMBDA.BI_dim_localidades
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_provincias')
+DROP TABLE  LAMBDA.BI_dim_provincias
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_rangos_etarios')
+DROP TABLE  LAMBDA.BI_dim_rangos_etarios
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_turnos')
+DROP TABLE  LAMBDA.BI_dim_turnos
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_descuentos')
+DROP TABLE  LAMBDA.BI_dim_descuentos
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_medios_pago')
+DROP TABLE  LAMBDA.BI_dim_medios_pago
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_categoria_subcategoria')
+DROP TABLE  LAMBDA.BI_dim_categoria_subcategoria
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_producto_categoria')
+DROP TABLE  LAMBDA.BI_dim_producto_categoria
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_producto_subcategoria')
+DROP TABLE  LAMBDA.BI_dim_producto_subcategoria
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_productos')
+DROP TABLE  LAMBDA.BI_dim_productos
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_categorias')
+DROP TABLE  LAMBDA.BI_dim_categorias
+
+IF EXISTS(SELECT [name] FROM sys.tables WHERE [name] = 'BI_dim_subcategorias')
+DROP TABLE  LAMBDA.BI_dim_subcategorias
+
+--DROP PREVENTIVO DE PROCEDURES---------------------------------------------------------------
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_tiempos')
+DROP PROCEDURE LAMBDA.BI_migrar_tiempos
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_sucursales')
+DROP PROCEDURE LAMBDA.BI_migrar_sucursales
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_localidades')
+DROP PROCEDURE LAMBDA.BI_migrar_localidades
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_provincias')
+DROP PROCEDURE LAMBDA.BI_migrar_provincias
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_clientes')
+DROP PROCEDURE LAMBDA.BI_migrar_clientes
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_estados')
+DROP PROCEDURE LAMBDA.BI_migrar_estados
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_rangos_etarios')
+DROP PROCEDURE LAMBDA.BI_migrar_rangos_etarios
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_turnos')
+DROP PROCEDURE LAMBDA.BI_migrar_turnos
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_medios_pago')
+DROP PROCEDURE LAMBDA.BI_migrar_medios_pago
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_descuentos')
+DROP PROCEDURE LAMBDA.BI_migrar_descuentos
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_categorias')
+DROP PROCEDURE LAMBDA.BI_migrar_categorias
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_productos')
+DROP PROCEDURE LAMBDA.BI_migrar_productos
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_subcategorias')
+DROP PROCEDURE LAMBDA.BI_migrar_subcategorias
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_categoria_subcategoria')
+DROP PROCEDURE LAMBDA.BI_migrar_categoria_subcategoria
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_producto_categoria')
+DROP PROCEDURE LAMBDA.BI_migrar_producto_categoria
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_producto_subcategoria')
+DROP PROCEDURE LAMBDA.BI_migrar_producto_subcategoria
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_ventas')
+DROP PROCEDURE LAMBDA.BI_migrar_ventas
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_envios')
+DROP PROCEDURE LAMBDA.BI_migrar_envios
+
+IF EXISTS(SELECT [name] FROM sys.procedures WHERE [name] = 'BI_migrar_pagos')
+DROP PROCEDURE LAMBDA.BI_migrar_pagos
+
+--DROP PREVENTIVO DE VISTAS-------------------------------------------------------------------
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_TicketPromedioMensual')
+DROP VIEW LAMBDA.v_TicketPromedioMensual
+GO
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_cantUnidadesPromedio')
+DROP VIEW LAMBDA.v_cantUnidadesPromedio
+GO
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_porcVentasxEdad')
+DROP VIEW LAMBDA.v_porcVentasxEdad
+GO
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_cantVentasTurnoLocalidad') 
+DROP VIEW LAMBDA.v_cantVentasTurnoLocalidad
+GO
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_porcentajeDescuentoMes')
+DROP VIEW LAMBDA.v_porcentajeDescuentoMes
+GO
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_top3CategsProdsMayorDesc') 
+DROP VIEW LAMBDA.v_top3CategsProdsMayorDesc
+GO
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_porcEnviosCumplidos')
+DROP VIEW LAMBDA.v_porcEnviosCumplidos
+GO
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_cantEnvRangoEtCuatriAño') 
+DROP VIEW LAMBDA.v_cantEnvRangoEtCuatriAño
+GO
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_top5LocalidadesEnvioCaro') 
+DROP VIEW LAMBDA.v_top5LocalidadesEnvioCaro
+GO
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_top3SucursalesMayorPagoCuotas') 
+DROP VIEW LAMBDA.v_top3SucursalesMayorPagoCuotas
+
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_promedioCuotaEdadCliente') 
+DROP VIEW LAMBDA.v_promedioCuotaEdadCliente
+
+IF EXISTS (SELECT name FROM sys.objects WHERE name = 'v_descApliPorMedioPago') 
+DROP VIEW LAMBDA.v_descApliPorMedioPago
+GO 
+
+--CREACIÓN DE FUNCIONES AUXILIARES------------------------------------------------------------
+CREATE FUNCTION LAMBDA.getAge(@dateofbirth date) --Recibe una fecha de nacimiento por parámetro
+RETURNS int										 --y devuelve la edad actual de la persona.
+AS
+BEGIN
+	DECLARE @age int;
+	
+	IF (MONTH(@dateofbirth)!=MONTH(GETDATE()))
+		SET @age = DATEDIFF(MONTH, @dateofbirth, GETDATE())/12;
+	ELSE IF(DAY(@dateofbirth) > DAY(GETDATE()))
+		SET @age = (DATEDIFF(MONTH, @dateofbirth, GETDATE())/12)-1;
+	ELSE 
+	BEGIN
+		SET @age = DATEDIFF(MONTH, @dateofbirth, GETDATE())/12;
+	END
+		RETURN @age;
+	END
+GO
+CREATE FUNCTION LAMBDA.getAgeRange (@age int) --Recibe una edad por parámetro y 
+RETURNS int							  --devuelve el rango de edad al que pertenece.	
+AS
+BEGIN
+	DECLARE @returnvalue int;
+
+	IF (@age < 25)
+	BEGIN
+		SET @returnvalue = 1;
+	END
+	IF (@age >= 25 AND @age <=35)
+	BEGIN
+		SET @returnvalue = 2;
+	END
+	ELSE IF (@age > 35 AND @age <=50)
+	BEGIN
+		SET @returnvalue =3;
+	END
+	ELSE IF(@age > 50)
+	BEGIN
+		SET @returnvalue = 4;
+	END
+
+	RETURN @returnvalue;
+END
+GO
+CREATE FUNCTION LAMBDA.getTurn (@FechaHora datetime)--Recibe una fecha y devuelve el codigo de turno al que pertenece.	
+RETURNS INT
+AS
+BEGIN
+    DECLARE @Turno INT;
+    
+    SET @Turno = CASE
+                    WHEN DATEPART(HOUR, @FechaHora) BETWEEN 8 AND 11 THEN 1  -- 08:00 - 12:00
+                    WHEN DATEPART(HOUR, @FechaHora) BETWEEN 12 AND 15 THEN 2 -- 12:00 - 16:00
+                    WHEN DATEPART(HOUR, @FechaHora) BETWEEN 16 AND 19 THEN 3 -- 16:00 - 20:00
+                    ELSE 4 -- Otra hora 
+                 END;
+    RETURN @Turno;
+END;
+GO
+CREATE FUNCTION LAMBDA.fn_Cuatrimestre (@Fecha DATETIME)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @Cuatrimestre INT;
+    SET @Cuatrimestre = CASE 
+        WHEN MONTH(@Fecha) IN (1, 2, 3) THEN 1
+        WHEN MONTH(@Fecha) IN (4,5, 6) THEN 2
+        WHEN MONTH(@Fecha) IN (7,8,9) THEN 3
+        WHEN MONTH(@Fecha) IN (10, 11, 12) THEN 4
+    END;
+    RETURN @Cuatrimestre;
+END;
+GO
+
+--CREACIÓN DE TABLAS DIMENSIONALES------------------------------------------------------------
+CREATE TABLE LAMBDA.BI_dim_tiempos(
+CODIGO_TIEMPO int IDENTITY PRIMARY KEY,
+AÑO int,
+CUATRIMESTRE int,
+MES int
+);
+
+CREATE TABLE LAMBDA.BI_dim_localidades(
+CODIGO_LOCALIDAD int IDENTITY PRIMARY KEY,
+LOCALIDAD nvarchar(255) null
+);
+
+CREATE TABLE LAMBDA.BI_dim_provincias(
+CODIGO_PROVINCIA int IDENTITY PRIMARY KEY,
+PROVINCIA nvarchar(255) null
+);
+
+CREATE TABLE LAMBDA.BI_dim_sucursales(
+CODIGO_SUCURSAL DECIMAL(18,0) PRIMARY KEY,
+DIRECCION nvarchar(255) not null,
+LOCALIDAD INT REFERENCES LAMBDA.BI_dim_localidades,
+PROVINCIA INT REFERENCES LAMBDA.BI_dim_provincias
+);
+
+CREATE TABLE LAMBDA.BI_dim_clientes (
+    CODIGO DECIMAL(18,0) IDENTITY PRIMARY KEY,
+    NOMBRE NVARCHAR(255),
+    APELLIDO NVARCHAR(255),
+    DNI DECIMAL(18,0),
+    FECHA_REGISTRO DATETIME,
+    TELEFONO DECIMAL(18,0),
+    MAIL NVARCHAR(255),
+    FECHA_NACIMIENTO DATE,
+    DOMICILIO NVARCHAR(255),
+    LOCALIDAD INT REFERENCES LAMBDA.BI_dim_localidades NOT NULL,
+    PROVINCIA INT REFERENCES LAMBDA.BI_dim_provincias NOT NULL
+);
+
+CREATE TABLE LAMBDA.BI_dim_estados (
+    ESTADO_CODIGO INT IDENTITY PRIMARY KEY,
+    DETALLE NVARCHAR(255)
+);
+
+CREATE TABLE  LAMBDA.BI_dim_rangos_etarios(
+CODIGO_RANGO int IDENTITY PRIMARY KEY,
+RANGO_DETALLE nvarchar(50) null
+);
+
+CREATE TABLE  LAMBDA.BI_dim_turnos(
+CODIGO_TURNO int IDENTITY PRIMARY KEY,
+TURNO_DETALLE NVARCHAR(50) null,
+);
+
+CREATE TABLE  LAMBDA.BI_dim_medios_pago(
+MP_CODIGO INT IDENTITY PRIMARY KEY,
+MP_DETALLE NVARCHAR(255),
+MP_TIPO NVARCHAR(255)
+);
+
+CREATE TABLE LAMBDA.BI_dim_descuentos (
+    DESCUENTO_CODIGO DECIMAL(18,0) PRIMARY KEY,
+    DESCRIPCION NVARCHAR(255),
+    FECHA_INICIO DATETIME,
+    FECHA_FIN DATETIME,
+    PORCENTAJE_DESC DECIMAL(18,2),
+    TOPE DECIMAL(18,2),
+    MEDIO_PAGO INT REFERENCES LAMBDA.BI_dim_medios_pago
+);
+
+CREATE TABLE LAMBDA.BI_dim_productos (
+    CODIGO_PRODUCTO DECIMAL(18,0) IDENTITY PRIMARY KEY,
+	NOMBRE NVARCHAR(255),
+	DESCRIPCION NVARCHAR(255),
+	MARCA NVARCHAR(255),
+	PRECIO DECIMAL(18,2)
+);
+
+CREATE TABLE LAMBDA.BI_dim_categorias (
+    CATEG_CODIGO DECIMAL(18,0) PRIMARY KEY,
+    CATEG_DESCRIPCION DECIMAL(18,0) NULL
+);
+
+CREATE TABLE LAMBDA.BI_dim_subcategorias (
+    SUBCATEG_CODIGO DECIMAL(18,0) PRIMARY KEY,
+    SUBCATEG_DESCRIPCION DECIMAL(18,0) NULL
+);
+GO
+
+--CREACIÓN DE TABLAS PUENTE (BRIDGE)------------------------------------------------------------
+CREATE TABLE LAMBDA.BI_dim_categoria_subcategoria (
+    CATEGORIA DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_categorias,
+    SUBCATEGORIA DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_subcategorias,
+	PRIMARY KEY(CATEGORIA,SUBCATEGORIA)
+);
+GO
+CREATE TABLE LAMBDA.BI_dim_producto_categoria (
+    PRODUCTO DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_productos,
+    CATEGORIA DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_categorias,
+	PRIMARY KEY(PRODUCTO,CATEGORIA)
+);
+GO
+CREATE TABLE LAMBDA.BI_dim_producto_subcategoria (
+    PRODUCTO DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_productos,
+    SUBCATEGORIA DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_subcategorias,
+	PRIMARY KEY(PRODUCTO,SUBCATEGORIA)
+);
+GO
+--CREACIÓN DE TABLAS FÁCTICAS------------------------------------------------------------
+CREATE TABLE LAMBDA.BI_fact_ventas (
+    TICKET_NUMERO DECIMAL(18,0),
+	SUCURSAL DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_sucursales NOT NULL,
+    TIPO_COMPROBANTE NVARCHAR(255),
+	CAJA_NUMERO DECIMAL(18,0),
+	TIEMPO INT REFERENCES LAMBDA.BI_dim_tiempos,
+	TURNO INT REFERENCES LAMBDA.BI_dim_turnos,
+	PRODUCTO DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_productos NOT NULL,
+	CANTIDAD DECIMAL(18,0),
+	PRECIO_TOTAL DECIMAL(18,2),
+	TICKET_SUBTOTAL_PRODUCTOS DECIMAL(18,2),
+	DESCUENTO_APLICADO_PROMOS DECIMAL(18,2),
+	DESCUENTO_APLICADO_MP DECIMAL(18,2),
+	MONTO_TOTAL DECIMAL(18,2),
+	RANGO_ETARIO_EMPLEADO INT REFERENCES LAMBDA.BI_dim_rangos_etarios,
+	PRIMARY KEY(TICKET_NUMERO,SUCURSAL,TIPO_COMPROBANTE, CAJA_NUMERO,PRODUCTO),
+
+);
+GO
+CREATE TABLE LAMBDA.BI_fact_envios (
+    TICKET_NUMERO DECIMAL(18,0),
+	SUCURSAL DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_sucursales NOT NULL,
+    TIPO_COMPROBANTE NVARCHAR(255),
+	CAJA_NUMERO DECIMAL(18,0),
+	CLIENTE DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_clientes NOT NULL,
+	RANGO_ETARIO_CLIENTE INT REFERENCES LAMBDA.BI_dim_rangos_etarios NOT NULL,
+    ESTADO INT REFERENCES LAMBDA.BI_dim_estados NOT NULL,
+    COSTO DECIMAL(18,2),
+    FECHA_PROGRAMADA DATETIME,
+    HORA_INICIO DECIMAL(18,0),
+    HORA_FIN DECIMAL(18,0),
+    FECHA_ENTREGA DATETIME,
+	PRIMARY KEY (TICKET_NUMERO,SUCURSAL,TIPO_COMPROBANTE,CAJA_NUMERO)
+);
+GO
+CREATE TABLE LAMBDA.BI_fact_pagos (
+	NUMERO_PAGO DECIMAL(18,0) IDENTITY PRIMARY KEY,
+    FECHA DATETIME,
+    IMPORTE DECIMAL(18,2),
+    DESCUENTO_APLICADO DECIMAL(18,2),
+    TICKET_NUMERO DECIMAL(18,0) NOT NULL,
+    SUCURSAL DECIMAL(18,0) NOT NULL,
+    TIPO_COMPROBANTE NVARCHAR(255) NOT NULL,
+	CAJA DECIMAL(18,0) NOT NULL,
+    MEDIO_PAGO INT REFERENCES LAMBDA.BI_dim_medios_pago NOT NULL,
+    DESCUENTO DECIMAL(18,0) REFERENCES LAMBDA.BI_dim_descuentos,
+	TARJETA_NUMERO NVARCHAR(50),
+    TARJETA_FECHA_VENCIMIENTO DATE,   
+    TARJETA_CUOTAS DECIMAL(18,0),
+    RANGO_ETARIO_CLIENTE INT REFERENCES LAMBDA.BI_dim_rangos_etarios,
+);
+GO
+
+--CREACION PROCEDURES DE MIGRACION------------------------------------------------------------
+CREATE PROCEDURE LAMBDA.BI_migrar_tiempos
+AS
+BEGIN
+    INSERT INTO LAMBDA.BI_dim_tiempos(AÑO, CUATRIMESTRE, MES)
+    SELECT DISTINCT YEAR(TICKET_FECHA_HORA),
+           CASE
+               WHEN MONTH(TICKET_FECHA_HORA) BETWEEN 1 AND 3 THEN 1
+               WHEN MONTH(TICKET_FECHA_HORA) BETWEEN 4 AND 6 THEN 2
+               WHEN MONTH(TICKET_FECHA_HORA) BETWEEN 7 AND 9 THEN 3
+               WHEN MONTH(TICKET_FECHA_HORA) BETWEEN 10 AND 12 THEN 4
+           END AS CUATRIMESTRE,
+           MONTH(TICKET_FECHA_HORA)
+    FROM LAMBDA.Ticket
+	ORDER BY YEAR(TICKET_FECHA_HORA),MONTH(TICKET_FECHA_HORA)
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_localidades
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_localidades(LOCALIDAD)
+	SELECT LOCALIDAD_NOMBRE
+	FROM LAMBDA.Localidad
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_provincias
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_provincias(PROVINCIA)
+	SELECT PROVINCIA_NOMBRE
+	FROM LAMBDA.Provincia
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_sucursales
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_sucursales(CODIGO_SUCURSAL, DIRECCION, LOCALIDAD, PROVINCIA)
+	SELECT SUCURSAL_NOMBRE,SUCURSAL_DIRECCION,SUCURSAL_LOCALIDAD,SUCURSAL_PROVINCIA
+	FROM LAMBDA.Sucursal
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_clientes
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_clientes(NOMBRE, APELLIDO, DNI, FECHA_REGISTRO,TELEFONO,MAIL,FECHA_NACIMIENTO,DOMICILIO,LOCALIDAD,PROVINCIA)
+	SELECT CLIENTE_NOMBRE,CLIENTE_APELLIDO,CLIENTE_DNI,CLIENTE_FECHA_REGISTRO,CLIENTE_TELEFONO,CLIENTE_MAIL,CLIENTE_FECHA_NACIMIENTO,CLIENTE_DOMICILIO,CLIENTE_LOCALIDAD,CLIENTE_PROVINCIA
+	FROM LAMBDA.Cliente
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_estados
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_estados(DETALLE)
+	SELECT ESTADO_DETALLE
+	FROM LAMBDA.Estado
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_rangos_etarios
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_rangos_etarios(RANGO_DETALLE) VALUES 
+    ('< 25'),
+    ('25 - 35'),
+    ('35 - 50'),
+    ('> 50');
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_turnos
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_turnos(TURNO_DETALLE) VALUES 
+    ('08:00 - 12:00'),
+    ('12:00 - 16:00'),
+    ('16:00 - 20:00'),
+    ('otro');
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_medios_pago
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_medios_pago(MP_DETALLE,MP_TIPO)
+	SELECT MP_DETALLE,MP_TIPO
+	FROM LAMBDA.Medio_Pago
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_descuentos
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_descuentos(DESCUENTO_CODIGO,DESCRIPCION,FECHA_INICIO,FECHA_FIN,PORCENTAJE_DESC,TOPE,MEDIO_PAGO)
+	SELECT DESCUENTO_CODIGO,DESCUENTO_DESCRIPCION,DESCUENTO_FECHA_INICIO,DESCUENTO_FECHA_FIN,DESCUENTO_PORCENTAJE_DESC,DESCUENTO_TOPE,DESCUENTO_MEDIO_PAGO
+	FROM LAMBDA.Descuento
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_productos
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_productos(NOMBRE,DESCRIPCION,MARCA,PRECIO)
+	SELECT pm.PRODUCTO_NOMBRE,p.PRODUCTO_DESCRIPCION,m.MARCA_DETALLE,pm.PRODUCTO_PRECIO
+	FROM LAMBDA.Producto_Marca pm JOIN LAMBDA.Producto p ON pm.PRODUCTO_NOMBRE = p.PRODUCTO_NOMBRE
+								  JOIN LAMBDA.Marca m ON pm.PRODUCTO_MARCA = m.MARCA_CODIGO
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_categorias
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_categorias(CATEG_CODIGO,CATEG_DESCRIPCION)
+	SELECT CATEG_CODIGO,CATEG_DESCRIPCION
+	FROM LAMBDA.Categoria
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_subcategorias
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_subcategorias(SUBCATEG_CODIGO,SUBCATEG_DESCRIPCION)
+	SELECT SUBCATEG_CODIGO,CATEG_DESCRIPCION
+	FROM LAMBDA.SubCategoria
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_categoria_subcategoria
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_categoria_subcategoria(CATEGORIA,SUBCATEGORIA)
+	SELECT CATEG_PADRE,CATEG_HIJA
+	FROM LAMBDA.Categoria_SubCategoria
+END;
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_producto_categoria
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_producto_categoria(PRODUCTO,CATEGORIA)
+	SELECT p.CODIGO_PRODUCTO,pc.PRODUCTO_CATEGORIA
+	FROM LAMBDA.BI_dim_productos p JOIN LAMBDA.Producto_Categoria pc ON p.NOMBRE = pc.PRODUCTO_NOMBRE
+END;
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_producto_subcategoria
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_dim_producto_subcategoria(PRODUCTO,SUBCATEGORIA)
+	SELECT p.CODIGO_PRODUCTO,psc.PRODUCTO_SUBCATEGORIA
+	FROM LAMBDA.BI_dim_productos p JOIN LAMBDA.Producto_SubCategoria psc ON p.NOMBRE = psc.PRODUCTO_NOMBRE
+END;
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_ventas
+AS
+BEGIN
+    INSERT INTO LAMBDA.BI_fact_ventas(
+        TICKET_NUMERO,
+        SUCURSAL,
+        TIPO_COMPROBANTE,
+        CAJA_NUMERO,
+        PRODUCTO,
+		CANTIDAD,
+		PRECIO_TOTAL,
+		TICKET_SUBTOTAL_PRODUCTOS,
+		DESCUENTO_APLICADO_PROMOS,
+		DESCUENTO_APLICADO_MP,
+        MONTO_TOTAL,
+        TIEMPO,
+        TURNO,
+        RANGO_ETARIO_EMPLEADO
+    )
+    SELECT 
+        t.TICKET_NUMERO,
+        t.TICKET_SUCURSAL,
+        t.TICKET_TIPO_COMPROBANTE,
+        t.TICKET_CAJA_NUMERO,
+        td.PRODUCTO_CODIGO,
+		td.TICKET_DET_CANTIDAD,
+		td.TICKET_DET_PRECIO,
+		t.TICKET_SUBTOTAL_PRODUCTOS,
+		t.TICKET_TOTAL_DESCUENTO_APLICADO,
+		t.TICKET_TOTAL_DESCUENTO_APLICADO_MP,
+        t.TICKET_TOTAL_TICKET, 
+        ti.CODIGO_TIEMPO, 
+        LAMBDA.getTurn(t.TICKET_FECHA_HORA),
+        LAMBDA.getAgeRange(LAMBDA.getAge(e.EMPLEADO_FECHA_NACIMIENTO)) AS RANGO_ETARIO_EMPLEADO
+    FROM 
+        LAMBDA.Ticket t JOIN LAMBDA.Ticket_Detalle td ON t.TICKET_NUMERO = td.TICKET_DET_NUMERO AND t.TICKET_SUCURSAL = td.TICKET_DET_SUCURSAL AND t.TICKET_TIPO_COMPROBANTE = td.TICKET_DET_COMPROBANTE AND t.TICKET_CAJA_NUMERO = td.TICKET_DET_CAJA
+						JOIN LAMBDA.BI_dim_tiempos ti ON YEAR(t.TICKET_FECHA_HORA) = ti.AÑO AND MONTH(t.TICKET_FECHA_HORA) = ti.MES
+						JOIN LAMBDA.Empleado e ON t.TICKET_EMPLEADO = e.EMPLEADO_LEGAJO
+END;
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_envios
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_fact_envios(TICKET_NUMERO,SUCURSAL,TIPO_COMPROBANTE,CAJA_NUMERO,CLIENTE,RANGO_ETARIO_CLIENTE,ESTADO,COSTO,FECHA_PROGRAMADA,HORA_INICIO,HORA_FIN,FECHA_ENTREGA)
+	SELECT ENVIO_TICKET_NUMERO,ENVIO_TICKET_SUCURSAL,ENVIO_TICKET_COMPROBANTE,ENVIO_TICKET_CAJA,ENVIO_CLIENTE,LAMBDA.getAgeRange(LAMBDA.getAge(c.FECHA_NACIMIENTO)) AS RANGO_ETARIO_CLIENTE,ENVIO_ESTADO,ENVIO_COSTO,ENVIO_FECHA_PROGRAMADA,ENVIO_HORA_INICIO,ENVIO_HORA_FIN,ENVIO_FECHA_ENTREGA
+	FROM LAMBDA.Envio e JOIN LAMBDA.BI_dim_clientes c ON e.ENVIO_CLIENTE = c.CODIGO
+END
+GO
+CREATE PROCEDURE LAMBDA.BI_migrar_pagos
+AS
+BEGIN
+	INSERT INTO LAMBDA.BI_fact_pagos(FECHA,IMPORTE,DESCUENTO_APLICADO,TICKET_NUMERO,SUCURSAL,TIPO_COMPROBANTE,CAJA,MEDIO_PAGO,DESCUENTO, TARJETA_NUMERO,TARJETA_FECHA_VENCIMIENTO,TARJETA_CUOTAS,RANGO_ETARIO_CLIENTE)
+	SELECT PAGO_FECHA,PAGO_IMPORTE,PAGO_DESCUENTO_APLICADO,PAGO_TICKET_NUMERO,PAGO_TICKET_SUCURSAL,PAGO_TICKET_COMPROBANTE,PAGO_TICKET_CAJA,PAGO_MEDIO_PAGO,PAGO_MEDIO_PAGO,PAGO_TARJETA_NRO,PAGO_TARJETA_FECHA_VENC,PAGO_TARJETA_CUOTAS,LAMBDA.getAgeRange(LAMBDA.getAge(c.FECHA_NACIMIENTO))
+	FROM LAMBDA.Pago p left join LAMBDA.Pago_Tarjeta pj on p.PAGO_NUMERO = pj.PAGO_NUMERO
+							JOIN LAMBDA.BI_dim_clientes c ON pj.PAGO_CLIENTE = c.CODIGO
+END
+GO
+--CREACION DE VISTAS------------------------------------------------
+CREATE VIEW LAMBDA.v_ticketPromedioMensual AS
+SELECT l.LOCALIDAD,t.AÑO, t.MES, AVG(fv.MONTO_TOTAL) AS PROMEDIO
+FROM LAMBDA.BI_fact_ventas fv JOIN LAMBDA.BI_dim_sucursales s ON fv.SUCURSAL = s.CODIGO_SUCURSAL
+							  JOIN LAMBDA.BI_dim_localidades l ON s.LOCALIDAD = l.CODIGO_LOCALIDAD
+							  JOIN LAMBDA.BI_dim_tiempos t ON fv.TIEMPO = t.CODIGO_TIEMPO
+GROUP BY l.LOCALIDAD,t.AÑO, t.MES;
+GO
+CREATE VIEW LAMBDA.v_cantUnidadesPromedio AS 
+SELECT tn.TURNO_DETALLE,t.CUATRIMESTRE, SUM(fv.CANTIDAD) / COUNT(DISTINCT fv.TICKET_NUMERO) AS CANT_UNIDADES_PROM
+FROM LAMBDA.BI_fact_ventas fv JOIN LAMBDA.BI_dim_tiempos t ON fv.TIEMPO = t.CODIGO_TIEMPO
+							  JOIN LAMBDA.BI_dim_turnos tn ON fv.TURNO = CODIGO_TURNO
+GROUP BY tn.TURNO_DETALLE,t.CUATRIMESTRE;
+GO
+CREATE VIEW LAMBDA.v_porcVentasxEdad AS
+SELECT 
+    t.CUATRIMESTRE,
+    re.RANGO_DETALLE,
+    fv.CAJA_NUMERO,
+    COUNT(fv.TICKET_NUMERO) * 100.0 / SUM(COUNT(fv.TICKET_NUMERO)) OVER (PARTITION BY t.CUATRIMESTRE, fv.CAJA_NUMERO) AS PORCENTAJE_VENTAS
+FROM LAMBDA.BI_fact_ventas fv
+JOIN LAMBDA.BI_dim_tiempos t ON fv.TIEMPO = t.CODIGO_TIEMPO
+JOIN LAMBDA.BI_dim_rangos_etarios re ON fv.RANGO_ETARIO_EMPLEADO = re.CODIGO_RANGO
+GROUP BY t.CUATRIMESTRE, re.RANGO_DETALLE,fv.CAJA_NUMERO;
+GO
+CREATE VIEW LAMBDA.v_cantVentasTurnoLocalidad AS
+SELECT t.MES, t.AÑO,tn.TURNO_DETALLE,l.LOCALIDAD, COUNT(distinct fv.TICKET_NUMERO) AS CANTIDAD_VENTAS
+FROM LAMBDA.BI_fact_ventas fv JOIN LAMBDA.BI_dim_tiempos t ON fv.TIEMPO = t.CODIGO_TIEMPO
+							  JOIN LAMBDA.BI_dim_turnos tn ON fv.TURNO = tn.CODIGO_TURNO
+							  JOIN LAMBDA.BI_dim_sucursales s ON fv.SUCURSAL = s.CODIGO_SUCURSAL 
+							  JOIN LAMBDA.BI_dim_localidades l ON s.LOCALIDAD = l.CODIGO_LOCALIDAD
+GROUP BY t.MES, t.AÑO, tn.TURNO_DETALLE, l.LOCALIDAD;
+GO
+CREATE VIEW LAMBDA.v_porcentajeDescuentoMes AS
+SELECT
+    t.AÑO, t.MES,
+    SUM(fv.MONTO_TOTAL) AS SUMA_MONTO_TOTAL,
+    SUM(fv.DESCUENTO_APLICADO_PROMOS) AS SUMA_DESCUENTO_TOTAL,
+    CASE
+        WHEN SUM(fv.MONTO_TOTAL) > 0 THEN (SUM(fv.DESCUENTO_APLICADO_PROMOS) / SUM(fv.MONTO_TOTAL)) * 100
+        ELSE 0  -- Manejo de divisiones por cero
+    END AS PORCENTAJE_DESCUENTO
+FROM LAMBDA.BI_fact_ventas fv JOIN LAMBDA.BI_dim_tiempos t ON fv.TIEMPO = t.CODIGO_TIEMPO
+GROUP BY t.AÑO, t.MES;
+GO
+CREATE VIEW LAMBDA.v_top3CategsProdsMayorDesc AS
+SELECT TOP 3 t.AÑO,t.CUATRIMESTRE, pc.CATEGORIA, SUM(DESCUENTO_APLICADO_PROMOS) AS TOTAL_DESCUENTO_APLICADO
+FROM LAMBDA.BI_fact_ventas v JOIN LAMBDA.BI_dim_tiempos t ON v.TIEMPO = t.CODIGO_TIEMPO
+							 JOIN LAMBDA.BI_dim_productos p ON v.PRODUCTO = p.CODIGO_PRODUCTO
+							 JOIN LAMBDA.BI_dim_producto_categoria pc ON p.CODIGO_PRODUCTO = pc.PRODUCTO
+GROUP BY t.AÑO,t.CUATRIMESTRE, pc.CATEGORIA
+ORDER BY TOTAL_DESCUENTO_APLICADO
+GO
+CREATE VIEW LAMBDA.v_porcEnviosCumplidos AS
+SELECT SUCURSAL, YEAR(FECHA_ENTREGA) AS Anio,MONTH(FECHA_ENTREGA) AS Mes,
+    SUM(CASE 
+            WHEN FECHA_ENTREGA <= FECHA_PROGRAMADA THEN 1 
+            ELSE 0 
+        END) * 100.0 / COUNT(*) AS Porcentaje_Cumplimiento
+FROM LAMBDA.BI_fact_envios
+GROUP BY SUCURSAL, YEAR(FECHA_ENTREGA), MONTH(FECHA_ENTREGA);
+GO
+CREATE VIEW LAMBDA.v_cantEnvRangoEtCuatriAño AS
+SELECT re.RANGO_DETALLE,YEAR(FECHA_PROGRAMADA) AS Anio,LAMBDA.fn_Cuatrimestre(FECHA_PROGRAMADA) AS Cuatrimestre,COUNT(*) AS Cantidad_Envios
+FROM LAMBDA.BI_fact_envios fv JOIN LAMBDA.BI_dim_rangos_etarios re ON fv.RANGO_ETARIO_CLIENTE = re.CODIGO_RANGO
+GROUP BY re.RANGO_DETALLE,YEAR(FECHA_PROGRAMADA), LAMBDA.fn_Cuatrimestre(FECHA_PROGRAMADA);
+GO
+CREATE VIEW LAMBDA.v_top5LocalidadesEnvioCaro AS
+SELECT TOP 5 l.LOCALIDAD,SUM(e.COSTO) AS Total_Costo_Envio
+FROM LAMBDA.BI_fact_envios e JOIN LAMBDA.BI_dim_clientes c ON e.CLIENTE = c.CODIGO
+							 JOIN LAMBDA.BI_dim_localidades l ON c.LOCALIDAD = l.CODIGO_LOCALIDAD
+GROUP BY l.LOCALIDAD
+ORDER BY Total_Costo_Envio DESC;
+GO
+CREATE VIEW LAMBDA.v_top3SucursalesMayorPagoCuotas AS
+SELECT TOP 3 SUCURSAL, year(FECHA) AS AÑO, month(FECHA) AS MES, mp.MP_DETALLE, SUM(IMPORTE) AS IMPORTE_TOTAL_CUOTAS
+FROM LAMBDA.BI_fact_pagos p JOIN LAMBDA.BI_dim_medios_pago mp ON p.MEDIO_PAGO = mp.MP_CODIGO
+WHERE TARJETA_CUOTAS IS NOT NULL --filtramos las que no tienen cuotas
+GROUP BY SUCURSAL,year(FECHA), month(FECHA),mp.MP_DETALLE
+ORDER BY IMPORTE_TOTAL_CUOTAS DESC;
+GO
+CREATE VIEW LAMBDA.v_promedioCuotaEdadCliente AS
+SELECT re.RANGO_DETALLE AS RANGO_ETARIO_CLIENTE,  AVG(IMPORTE / TARJETA_CUOTAS) AS PROMEDIO_IMPORTE_CUOTAS
+FROM LAMBDA.BI_fact_pagos p JOIN LAMBDA.BI_dim_rangos_etarios re ON p.RANGO_ETARIO_CLIENTE = re.CODIGO_RANGO
+WHERE TARJETA_CUOTAS IS NOT NULL --filtramos las que no tienen cuotas
+GROUP BY re.RANGO_DETALLE
+GO
+CREATE VIEW LAMBDA.v_descApliPorMedioPago AS
+SELECT
+    mp.MP_DETALLE,
+    YEAR(FECHA) AS AÑO,
+	LAMBDA.fn_Cuatrimestre(FECHA) AS Cuatrimestre,
+    SUM(DESCUENTO_APLICADO) AS TotalDescuentos,
+    SUM(IMPORTE) AS TotalPagosSinDescuento,
+    CASE
+        WHEN SUM(IMPORTE) > 0 THEN (SUM(DESCUENTO_APLICADO) / SUM(IMPORTE + DESCUENTO_APLICADO)) * 100
+        ELSE 0
+    END AS PorcentajeDescuento
+FROM LAMBDA.BI_fact_pagos p JOIN LAMBDA.BI_dim_medios_pago mp ON p.MEDIO_PAGO = mp.MP_CODIGO
+GROUP BY mp.MP_DETALLE, YEAR(FECHA),LAMBDA.fn_Cuatrimestre(FECHA)
+GO
+
+--EJECUCIÓN DE PROCEDURES: MIGRACIÓN DE MODELO OLTP A MODELO BI
+ BEGIN TRANSACTION
+ BEGIN TRY
+	EXECUTE LAMBDA.BI_migrar_tiempos
+	EXECUTE LAMBDA.BI_migrar_localidades
+	EXECUTE LAMBDA.BI_migrar_provincias
+	EXECUTE LAMBDA.BI_migrar_sucursales
+	EXECUTE LAMBDA.BI_migrar_clientes
+	EXECUTE LAMBDA.BI_migrar_estados
+	EXECUTE LAMBDA.BI_migrar_rangos_etarios
+	EXECUTE LAMBDA.BI_migrar_turnos
+	EXECUTE LAMBDA.BI_migrar_medios_pago
+	EXECUTE LAMBDA.BI_migrar_descuentos
+	EXECUTE LAMBDA.BI_migrar_categorias
+	EXECUTE LAMBDA.BI_migrar_subcategorias
+	EXECUTE LAMBDA.BI_migrar_categoria_subcategoria
+	EXECUTE LAMBDA.BI_migrar_productos
+	EXECUTE LAMBDA.BI_migrar_producto_categoria
+	EXECUTE LAMBDA.BI_migrar_producto_subcategoria
+	EXECUTE LAMBDA.BI_migrar_ventas
+	EXECUTE LAMBDA.BI_migrar_envios
+	EXECUTE LAMBDA.BI_migrar_pagos
+END TRY
+BEGIN CATCH
+    ROLLBACK TRANSACTION;
+	THROW 50001, 'Error al cargar el modelo de BI, ninguna tabla fue cargada',1;
+END CATCH
+
+
+   
+GO
+
+/*
+--PRUEBA DE LAS VISTAS------------------------------------------------------------
+SELECT * FROM LAMBDA.v_ticketPromedioMensual
+SELECT * FROM LAMBDA.v_cantUnidadesPromedio
+SELECT * FROM LAMBDA.v_porcVentasxEdad
+SELECT * FROM LAMBDA.v_cantVentasTurnoLocalidad
+SELECT * FROM LAMBDA.v_porcentajeDescuentoMes
+SELECT * FROM LAMBDA.v_top3CategsProdsMayorDesc
+SELECT * FROM LAMBDA.v_porcEnviosCumplidos
+SELECT * FROM LAMBDA.v_cantEnvRangoEtCuatriAño
+SELECT * FROM LAMBDA.v_top5LocalidadesEnvioCaro
+SELECT * FROM LAMBDA.v_top3SucursalesMayorPagoCuotas
+SELECT * FROM LAMBDA.v_promedioCuotaEdadCliente
+SELECT * FROM LAMBDA.v_descApliPorMedioPago
+*/
